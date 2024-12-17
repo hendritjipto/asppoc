@@ -5,5 +5,14 @@
     "kafkajs": "^2.2.4",
     "mongodb": "^6.11.0",
     "package": "^1.0.1"
-  }
+  },
+  "name": "asppoc",
+  "version": "1.0.0",
+  "description": "#### Scenario Testing",
+  "main": "account.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
 }

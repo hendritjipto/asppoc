@@ -1,11 +1,6 @@
 s = {$source : {
     connectionName : "kafka",
     topic : ["account", "account_ex"],
-    // config: {
-    //     // Earliest to read from the beginning of the topic
-    //     auto_offset_reset: "beginning",
-    //     group_id: "mongodbatlas1"
-    // }
 }}
 
 m = {

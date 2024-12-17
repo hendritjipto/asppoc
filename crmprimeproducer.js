@@ -1,9 +1,9 @@
 const { Kafka } = require('kafkajs');
-const { generateMessages } = require('./account.js');  // Import the generateMessages function
+const { generateMessages } = require('./crmprime.js');  // Import the generateMessages function
 
 // Initialize Kafka
 const kafka = new Kafka({
-    clientId: 'sample-producer-customer-account-opening',
+    clientId: 'sample-producer-crm-prime',
     brokers: ['pkc-312o0.ap-southeast-1.aws.confluent.cloud:9092'], // From Confluent Cloud
     ssl: true,
     sasl: {
@@ -16,28 +16,28 @@ const kafka = new Kafka({
 // Create a producer instance
 const producer = kafka.producer();
 
-const produceMessages = async (count) => {
+const produceMessagesPrime = async (count) => {
     const messages = generateMessages(count,false); // Generate X messages
 
     await producer.connect();
 
     // Send the generated messages to your topic
     await producer.send({
-        topic: 'account',
+        topic: 'prime',
         messages: messages.map(msg => ({ value: JSON.stringify(msg) })),
     });
 
     await producer.disconnect();
 };
 
-const produceMessagesEx = async (count) => {
+const produceMessagesCRM = async (count) => {
     const messages = generateMessages(count, true); // Generate X messages
 
     await producer.connect();
 
     // Send the generated messages to your topic
     await producer.send({
-        topic: 'account_ex',
+        topic: 'crm',
         messages: messages.map(msg => ({ value: JSON.stringify(msg) })),
     });
 
@@ -48,8 +48,8 @@ const produceMessagesEx = async (count) => {
 const numberOfMessages = 1000;
 
 for (let i = 0; i < 1; i++) {
-    produceMessages(numberOfMessages).catch(console.error);
-    produceMessagesEx(numberOfMessages).catch(console.error);
+    produceMessagesPrime(numberOfMessages).catch(console.error);
+    produceMessagesCRM(numberOfMessages).catch(console.error);
     //const messages = generateMessages(5, true);
     //console.log(messages);
 }
